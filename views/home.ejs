@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home page</title>
+  <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/font/css/all.min.css">
+  <style>
+    a {
+      color: white;
+      text-decoration: none;
+    }
+
+    img {
+      height: 50vh;
+      object-fit: cover;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="p-2 bg-primary text-white d-flex align-items-center justify-content-around">
+    <div>
+      <a href="/">
+        <h1>JODECI</h1>
+      </a>
+    </div>
+    <div class="d-flex align-items-center justify-content-around">
+      <p class="me-2 btn btn-outline-light"><a href="/add">Add item <i class="fas fa-plus"></i></a></p>
+      <p class="me-2 btn btn-outline-light"><a href="/about">About us <i class="fas fa-users"></i></a></p>
+    </div>
+  </header>
+  <main class="container my-3">
+    <div class="search my-3">
+      <form action="/search" method="get">
+        <div class="form-group d-flex">
+          <input type="text" name="cat" class="form-control" placeholder="Search item...">
+          <button class="btn btn-primary">search</button>
+        </div>
+      </form>
+    </div>
+
+    <% if(search) {%>
+      <div class="row">
+        <% if(search.length) {%>
+          <% search.forEach(item=> {%>
+            <div class="col-md-4">
+              <div class="card mt-2">
+                <div class="card-body">
+                  <img src="/assets/<%= item.item_image %>" alt="" class="card-img">
+                  <div class="card-title">
+                    <b>Wine name:</b>
+                    <%= item.item_name %>
+                  </div>
+                  <div class="card-title">
+                    <b>Wine category:</b>
+                    <%= item.item_cat %>
+                  </div>
+                  <div class="card-text">
+                    <p>
+                      <b>price:</b>
+                      $<%= item.item_price %>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <%})%>
+              <%} else {%>
+                <div class="d-flex justify-content-center align-items-center" style="height: calc(100vh - 200px);">
+                  <h3>No items found!</h3>
+                </div>
+                <%}%>
+      </div>
+      <%} else {%>
+        <div class="row">
+          <% if(items.length) {%>
+            <% items.forEach(item=> {%>
+              <div class="col-md-4">
+                <div class="card mt-2">
+                  <div class="card-body">
+                    <img src="/assets/<%= item.item_image %>" alt="" class="card-img">
+                    <div class="card-title">
+                      <b>Wine name:</b>
+                      <%= item.item_name %>
+                    </div>
+                    <div class="card-title">
+                      <b>Wine category:</b>
+                      <%= item.item_cat %>
+                    </div>
+                    <div class="card-text">
+                      <p>
+                        <b>price:</b>
+                        $<%= item.item_price %>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <%})%>
+                <%} else {%>
+                  <div class="d-flex justify-content-center align-items-center" style="height: calc(100vh - 200px);">
+                    <h3>No items!</h3>
+                  </div>
+                  <%}%>
+        </div>
+        <%}%>
+
+  </main>
+</body>
+
+</html>
